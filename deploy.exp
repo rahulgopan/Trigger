@@ -1,0 +1,21 @@
+#!/usr/bin/expect
+
+set host [lindex $argv 0]
+set user [lindex $argv 1]
+set password [lindex $argv 2]
+
+spawn ssh "$user\@$host"
+set prompt "(\\\#|\\\$) $"
+
+#expect -nocase -re "password:"
+
+#expect -re $prompt
+#send "$cmd\r"
+expect -re "password:"
+send "$password\r"
+expect "$ " {send "cat mac\r"}
+
+#expect "$"
+
+#send "cat mac"
+	
